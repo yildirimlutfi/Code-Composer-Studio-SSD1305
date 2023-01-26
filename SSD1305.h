@@ -233,6 +233,8 @@ void scrool()
 
 void displayBuffer()
 {
+///////////////////////////////////////////////THE DISPLAY ROTATED 180° /////////////////////////////////
+//if you want real coordinate comment this part open other part
     int i,j;
     for(i=0;i<WIDTH;i++)
     {
