@@ -61,8 +61,6 @@ unsigned char Data_BUS;
 #define IC_RST IOID_13
 #define SPI_SDA IOID_14
 #define SPI_SCK IOID_10
-#define LED_RED IOID_6
-#define LED_GREEN IOID_7
 
 PIN_Config PinTable[] = {
 
@@ -71,8 +69,6 @@ PIN_Config PinTable[] = {
                          SPI_DC       | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
                          SPI_SDA      | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
                          SPI_SCK      | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
-                         LED_RED      | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
-                         LED_GREEN    | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
     PIN_TERMINATE
 };
 
