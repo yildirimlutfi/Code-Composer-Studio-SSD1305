@@ -143,7 +143,6 @@ void SPItransfer(unsigned char dat)
         delay(1);
         PIN_setOutputValue(PinHandle, SPI_SCK,0);
     }
-
 }
 
 void command(uint8_t cmd)
@@ -223,8 +222,6 @@ void scrool()
     command(0b000);
     command(0b000);
     command(0b111);
-
-
 }
 
 void displayBuffer()
@@ -287,7 +284,6 @@ void clearArea(uint8_t startPixelX, uint64_t startPixelY, uint8_t width, uint64_
             buffer[i][j]=0;
         }
     }
-    displayBuffer();
 }
 
 void drawLine(uint8_t startPixelX, uint8_t startPixelY, uint8_t finishPixelX, uint8_t finishPixelY)
@@ -333,7 +329,6 @@ void drawLine(uint8_t startPixelX, uint8_t startPixelY, uint8_t finishPixelX, ui
         }
 
     }
-    displayBuffer();
 }
 
 void drawFont_5x8(uint8_t startPixelX, uint8_t startPixelY, char character)
@@ -369,7 +364,6 @@ void drawString(uint8_t startPixelX, uint8_t startPixelY, char character[])
         drawFont_5x8(startPixelX+(i*7),startPixelY,character[i]);
         i++;
     }
-    displayBuffer();
 }
 
 void drawNumberDecimal(uint8_t startPixelX, uint8_t startPixelY, int64_t number)
@@ -399,5 +393,4 @@ void drawImage(uint8_t startPixelX, uint8_t startPixelY,const uint8_t *bitmap, u
             buffer[i][j+7]=(bitmap[((i-startPixelX) * (imagePixelHeight/8) ) + (j/8)]>>0)&0x01;
         }
     }
-    displayBuffer();
 }
