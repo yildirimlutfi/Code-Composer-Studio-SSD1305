@@ -287,12 +287,10 @@ void clearArea(uint8_t startPixelX, uint64_t startPixelY, uint8_t width, uint64_
 }
 
 void drawLine(uint8_t startPixelX, uint8_t startPixelY, uint8_t finishPixelX, uint8_t finishPixelY)
-{
+{//Bresenham's line algorithm
     if(startPixelX>127 || startPixelY>63 || finishPixelX>127 || finishPixelY>63)
         return;
 
-    float slope;
-    float tempX=0,tempY=0;
     int i,j;
 
     if(startPixelX==finishPixelX)
@@ -327,7 +325,6 @@ void drawLine(uint8_t startPixelX, uint8_t startPixelY, uint8_t finishPixelX, ui
                 startPixelY += sy;
             }
         }
-
     }
 }
 
@@ -391,6 +388,35 @@ void drawImage(uint8_t startPixelX, uint8_t startPixelY,const uint8_t *bitmap, u
             buffer[i][j+5]=(bitmap[((i-startPixelX) * (imagePixelHeight/8) ) + (j/8)]>>2)&0x01;
             buffer[i][j+6]=(bitmap[((i-startPixelX) * (imagePixelHeight/8) ) + (j/8)]>>1)&0x01;
             buffer[i][j+7]=(bitmap[((i-startPixelX) * (imagePixelHeight/8) ) + (j/8)]>>0)&0x01;
+        }
+    }
+}
+
+void drawCircle(uint8_t x0, uint8_t y0, uint8_t radius)
+{//midpoint circle algorithm
+    int x = radius;
+    int y = 0;
+    int radiusError = 1 - x;
+
+    while(x >= y)
+    {
+        buffer[x + x0][y + y0]=1;
+        buffer[y + x0][x + y0]=1;
+        buffer[-x + x0][y + y0]=1;
+        buffer[-y + x0][x + y0]=1;
+        buffer[-x + x0][-y + y0]=1;
+        buffer[-y + x0][-x + y0]=1;
+        buffer[x + x0][-y + y0]=1;
+        buffer[y + x0][-x + y0]=1;
+        y++;
+        if (radiusError<0)
+        {
+            radiusError += 2 * y + 1;
+        }
+        else
+        {
+            x--;
+            radiusError += 2 * (y - x) + 1;
         }
     }
 }
