@@ -304,7 +304,7 @@ void drawLine(uint8_t startPixelX, uint8_t startPixelY, uint8_t finishPixelX, ui
             buffer[i][startPixelY]=1;
         }
     else
-    {//this part doesn't work completely
+    {
 
         int dx = abs(finishPixelX - startPixelX), sx = startPixelX < finishPixelX ? 1 : -1;
         int dy = abs(finishPixelY - startPixelY), sy = startPixelY < finishPixelY ? 1 : -1;
