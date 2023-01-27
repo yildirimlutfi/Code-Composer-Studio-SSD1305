@@ -68,8 +68,8 @@ void main()
     oledInit();
     clearDisplay();
     logo(true);
-    scrool();
-
+//    drawLine(0, 0, 127, 63);
+    
     while(1)
     {
         for(i=0;i<1000;i++)
@@ -92,6 +92,7 @@ void main()
             battery(i%5);
             body(i,i);
             CPUdelay(1000000);
+
         }
     }
 }
