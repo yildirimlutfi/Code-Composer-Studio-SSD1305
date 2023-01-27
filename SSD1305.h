@@ -50,7 +50,7 @@ void exampleOfDisplay(uint8_t startX, uint8_t startY, uint8_t finishX, uint8_t f
 #include <stdio.h>
 #include "font.h"
 #include "imagesOfDisplay.h"
-
+#include "math.h"
 /* Pin driver handle */
 static PIN_Handle PinHandle;
 static PIN_State PinState;
@@ -296,7 +296,7 @@ void drawLine(uint8_t startPixelX, uint8_t startPixelY, uint8_t finishPixelX, ui
         return;
 
     float slope;
-    float temp;
+    float tempX=0,tempY=0;
     int i,j;
 
     if(startPixelX==finishPixelX)
@@ -311,21 +311,29 @@ void drawLine(uint8_t startPixelX, uint8_t startPixelY, uint8_t finishPixelX, ui
         }
     else
     {//this part doesn't work completely
-        slope= ((float)finishPixelY-(float)startPixelY) / ((float)finishPixelX-(float)startPixelX);
-        buffer[startPixelX][startPixelY]=1;
-        buffer[finishPixelX][finishPixelY]=1;
-        for(i=startPixelX;i<finishPixelX+1;i++)
-        {
-            for(j=startPixelY;j<finishPixelY+1;j++)
-            {
-                temp=(float)i*slope;
-                if(((int)temp)==((int)j))
-                {
-                    buffer[i][j]=1;
-                }
+
+        int dx = abs(finishPixelX - startPixelX), sx = startPixelX < finishPixelX ? 1 : -1;
+        int dy = abs(finishPixelY - startPixelY), sy = startPixelY < finishPixelY ? 1 : -1;
+        int err = (dx > dy ? dx : -dy) / 2;
+
+        while (1) {
+            buffer[startPixelX][startPixelY]=1;
+            if (startPixelX == finishPixelX && startPixelY == finishPixelY) {
+                break;
+            }
+            int e2 = err;
+            if (e2 > -dx) {
+                err -= dy;
+                startPixelX += sx;
+            }
+            if (e2 < dy) {
+                err += dx;
+                startPixelY += sy;
             }
         }
+
     }
+    displayBuffer();
 }
 
 void drawFont_5x8(uint8_t startPixelX, uint8_t startPixelY, char character)
