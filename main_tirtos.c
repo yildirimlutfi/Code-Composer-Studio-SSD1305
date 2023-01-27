@@ -68,9 +68,9 @@ void main()
     oledInit();
     clearDisplay();
     logo(true);
-    drawLine(0, 0, 127, 63);
-    drawLine(0, 63, 127, 0);
-    drawCircle(64,32,31);
+    drawLine(107, 43, 127, 63);
+    drawLine(107, 63, 127, 43);
+    drawCircle(117,53,10);
     while(1)
     {
         for(i=0;i<1000;i++)
